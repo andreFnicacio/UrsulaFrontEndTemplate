@@ -519,10 +519,16 @@ const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
 
   const onBotoIniciarSessoClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-
-    const user = { name: Getname, email: Getemail, phone: Getphone, password: Getpassword };
-    console.log(user);
-
+  
+    const user = {
+      name: Getname,
+      email: Getemail,
+      phone: Getphone,
+      password: Getpassword,
+    };
+  
+    console.log(user); // Verifique no console se os dados estão corretos
+  
     try {
       const response = await fetch('https://grantosegurosapimanagement-production.up.railway.app/users/register', {
         method: 'POST',
@@ -530,14 +536,15 @@ const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
-        mode: 'no-cors',
       });
-      
-      console.log(response);
-
-      if (response.status === 200) {
+  
+      console.log('Response:', response); // Verifique no console a resposta da requisição
+  
+      if (response.ok) { // Verifica se a resposta é ok (status 200-299)
         navigate("/pgina-login");
       } else {
+        const errorData = await response.json();
+        console.error('Erro na resposta:', errorData); // Exibe a mensagem de erro detalhada
         alert('Erro no cadastro, tente novamente 😬');
       }
     } catch (error) {
@@ -545,6 +552,7 @@ const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
       alert('Erro no cadastro, tente novamente 😬');
     }
   }, [Getname, Getemail, Getphone, Getpassword, navigate]);
+  
 
   return (
     <InterfaceLoginRoot className={className}>
