@@ -511,16 +511,16 @@ const InterfaceLoginRoot = styled.form`
 const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
   className = "",
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [Getname, setName] = useState("");
+  const [Getemail, setEmail] = useState("");
+  const [Getphone, setPhone] = useState("");
+  const [Getpassword, setPassword] = useState("");
   const navigate = useNavigate();
 
   const onBotoIniciarSessoClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    const user = { name, email, phone, password };
+    const user = { name: Getname, email: Getemail, phone: Getphone, password: Getpassword };
     console.log(user);
 
     try {
@@ -544,7 +544,7 @@ const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
       console.error('Erro na requisição:', error);
       alert('Erro no cadastro, tente novamente 😬');
     }
-  }, [name, email, phone, password, navigate]);
+  }, [Getname, Getemail, Getphone, Getpassword, navigate]);
 
   return (
     <InterfaceLoginRoot className={className}>
