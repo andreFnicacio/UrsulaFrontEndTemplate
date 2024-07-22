@@ -530,8 +530,9 @@ const interfaceCadastro: FunctionComponent<interfaceCadastroType> = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
+        mode: 'no-cors',
       });
-
+      
       console.log(response);
 
       if (response.status === 200) {
