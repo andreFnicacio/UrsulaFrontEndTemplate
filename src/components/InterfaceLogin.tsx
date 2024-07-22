@@ -351,7 +351,7 @@ const interfaceLogin: FunctionComponent<InterfaceLoginType> = ({
       console.log('Response:', response);
 
       if (response.ok) {
-        navigate("/dashboard"); // Navega para o dashboard ou página principal após o login bem-sucedido
+        navigate("/backoffice"); // Navega para o dashboard ou página principal após o login bem-sucedido
       } else {
         const errorData = await response.json();
         console.error('Erro na resposta:', errorData);
