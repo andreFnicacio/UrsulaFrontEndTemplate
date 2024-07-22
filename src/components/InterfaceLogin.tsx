@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback } from "react";
+import { FunctionComponent, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -90,15 +90,23 @@ const EmailExampleChild = styled.div`
   display: none;
   max-width: 100%;
 `;
-const Emailexemplocom = styled.div`
-  height: 1.231rem;
+const Emailexemplocom = styled.input`
   width: 10.35rem;
+  border: none;
+  outline: none;
+  font-family: var(--font-inter);
+  font-size: var(--font-size-xs);
+  background-color: transparent;
+  height: 1.231rem;
   position: relative;
+  color: var(--color-darkgray);
+  text-align: left;
   display: inline-block;
-  flex-shrink: 0;
   white-space: nowrap;
+  padding: 0;
   z-index: 2;
 `;
+
 const EmailExample = styled.div`
   align-self: stretch;
   border-radius: var(--br-9xs);
@@ -318,18 +326,42 @@ const InterfaceLoginRoot = styled.div`
   }
 `;
 
-const InterfaceLogin: FunctionComponent<InterfaceLoginType> = ({
+const interfaceLogin: FunctionComponent<InterfaceLoginType> = ({
   className = "",
 }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const onBotoIniciarSessoClick = useCallback(() => {
-    navigate("/backoffice");
-  }, [navigate]);
+  const onBotoIniciarSessoClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
 
-  const onCriarContaContainerClick = useCallback(() => {
-    navigate("/criar-conta");
-  }, [navigate]);
+    const user = { email, password };
+    console.log(user);
+
+    try {
+      const response = await fetch('https://grantosegurosapimanagement-production.up.railway.app/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+
+      console.log('Response:', response);
+
+      if (response.ok) {
+        navigate("/dashboard"); // Navega para o dashboard ou página principal após o login bem-sucedido
+      } else {
+        const errorData = await response.json();
+        console.error('Erro na resposta:', errorData);
+        alert('Erro no login, tente novamente 😬');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      alert('Erro no login, tente novamente 😬');
+    }
+  }, [email, password, navigate]);
 
   return (
     <InterfaceLoginRoot className={className}>
@@ -340,7 +372,7 @@ const InterfaceLogin: FunctionComponent<InterfaceLoginType> = ({
             <EmailInput>
               <Login>LOGIN</Login>
             </EmailInput>
-            <FaaLoginPara> Faça login para acessar nosso sistema</FaaLoginPara>
+            <FaaLoginPara>Faça login para acessar nosso sistema</FaaLoginPara>
           </LoginFields>
         </ForgotPassword>
         <LoginInput>
@@ -348,14 +380,22 @@ const InterfaceLogin: FunctionComponent<InterfaceLoginType> = ({
             <EMail>E-mail</EMail>
             <EmailExample>
               <EmailExampleChild />
-              <Emailexemplocom>email@exemplo.com</Emailexemplocom>
+              <Emailexemplocom
+                placeholder="email@exemplo.com"
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </EmailExample>
           </EmailInput1>
           <EmailField>
             <Senha>Senha</Senha>
             <PasswordField>
               <PasswordFieldChild />
-              <PasswordPlaceholder placeholder="************" type="text" />
+              <PasswordPlaceholder
+                placeholder="************"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </PasswordField>
             <LoginField>
               <EsqueceuASenha>Esqueceu a senha?</EsqueceuASenha>
@@ -366,7 +406,7 @@ const InterfaceLogin: FunctionComponent<InterfaceLoginType> = ({
           <Login1>Login</Login1>
         </BotoIniciarSesso>
       </LoginFields1>
-      <CriarConta onClick={onCriarContaContainerClick}>
+      <CriarConta>
         <CrieUmaContaContainer1>
           <CrieUmaContaContainer>
             <CrieUmaConta>{`Crie uma conta na `}</CrieUmaConta>
@@ -379,4 +419,4 @@ const InterfaceLogin: FunctionComponent<InterfaceLoginType> = ({
   );
 };
 
-export default InterfaceLogin;
+export default interfaceLogin;
