@@ -351,6 +351,8 @@ const interfaceLogin: FunctionComponent<InterfaceLoginType> = ({
       console.log('Response:', response);
 
       if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("secretToken", data.user.secretToken);
         navigate("/backoffice");
       } else {
         const errorData = await response.json();
