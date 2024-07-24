@@ -8,7 +8,7 @@ export async function doLogin(email, password) {
     const response = await axios.post(registerUrl, { email, password });
     if (response.status === 201 || response.status === 200) {
       alert('Login sucesso!');
-      return true;
+      return response.data;
     } else {
       alert('Erro ao realizar o login. Usuário ou Senha inválidos.');
       return false;

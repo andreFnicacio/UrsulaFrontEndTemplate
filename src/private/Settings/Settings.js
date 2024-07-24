@@ -3,19 +3,22 @@ import { Link, useHistory } from 'react-router-dom';
 
 function Login() {
     return (
-        <main>
-            <section className="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
-                <div className="container">
-                    <p className="text-center">
-                        <Link to="/" className="d-flex align-items-center justify-content-center">
-                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd"></path>
-                            </svg>
-                            Settings
-                        </Link>
-                    </p>
-                </div>
-            </section>
+        <main className='content'>
+            <div className='col-12 mb-4'>
+                <table className="table align-items-center table-flush table-sm table-hover tableFixHead">
+                    <thead className="text-red background-color-red">
+                        <tr className="background-color-red">
+                        <th className="border-bottom background-color-red col-1" scope="col">CATEGORIA</th>
+                            <th className="border-bottom background-color-red col-1" scope="col">CNPJ</th>
+                            <th className="border-bottom background-color-red col-2" scope="col">VALOR</th>
+                            <th className="border-bottom background-color-red col-2" scope="col">CREATEDAT</th>
+                            <th className="border-bottom background-color-red col-2" scope="col">DURATION</th>
+                            <th className="border-bottom background-color-red col-2" scope="col">CONTRATANTE</th>
+                            <th className="border-bottom background-color-red col-2" scope="col">CONTRATADA</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </main>
     );
 }

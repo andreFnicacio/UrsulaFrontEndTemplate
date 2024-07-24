@@ -4,6 +4,7 @@ import Login from './public/Login/Login';
 import Register from './public/Register/Register';
 import Settings from './private/Settings/Settings';
 import MainPage from './public/Main/Main';
+import Backoffice from './public/Backoffice/BackOffice';
 
 function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/backoffice" element={<Backoffice />} />        
         <Route path="/register" element={<Register />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>

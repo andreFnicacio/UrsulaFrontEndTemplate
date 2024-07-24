@@ -1,0 +1,267 @@
+.topo-icon {
+  position: absolute;
+  top: -13.625rem;
+  left: -11rem;
+  width: 203.375rem;
+  height: 31.125rem;
+}
+.b-home-child,
+.bg-menu-lateral {
+  position: absolute;
+  top: 0;
+  left: 3.125rem;
+}
+.bg-menu-lateral {
+  background-color: #f3f3f3;
+  border: 1px solid #c8c8c8;
+  box-sizing: border-box;
+  width: 12.5rem;
+  height: 94rem;
+}
+.b-home-child {
+  background-color: #ececec;
+  width: 12.25rem;
+  height: 2.625rem;
+}
+.home {
+  position: absolute;
+  top: 0.581rem;
+  left: calc(50% - 136.5px);
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  font-family: var(--font-mulish);
+  color: #333;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17.063rem;
+  height: 1.5rem;
+}
+.b-home-item {
+  position: absolute;
+  height: 54.05%;
+  width: 8.79%;
+  top: 21.43%;
+  right: 64.47%;
+  bottom: 24.52%;
+  left: 26.74%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.b-home,
+.b-home-inner {
+  position: absolute;
+  height: 2.625rem;
+}
+.b-home-inner {
+  top: 0;
+  left: 15.375rem;
+  border-radius: 1px;
+  background-color: var(--color-darkblue);
+  width: 0.188rem;
+}
+.b-home {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  top: 18.5rem;
+  left: 0;
+  width: 17.063rem;
+}
+.b-enviar-arquivo-child {
+  position: absolute;
+  top: 0;
+  left: 1.563rem;
+  border-radius: 11px;
+  background-color: var(--color-darkblue);
+  width: 11.5rem;
+  height: 3.125rem;
+}
+.b,
+.enviar-arquivo {
+  position: absolute;
+  line-height: 1.5rem;
+  display: flex;
+  font-family: var(--font-mulish);
+  color: var(--color-white);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.enviar-arquivo {
+  top: 0.75rem;
+  left: calc(50% - 136.5px);
+  font-size: 1.1rem;
+  width: 17.063rem;
+  height: 1.5rem;
+}
+.b {
+  top: 0.813rem;
+  left: calc(50% - 96.5px);
+  font-size: 3rem;
+  width: 1.5rem;
+  height: 0.75rem;
+}
+.b-enviar-arquivo {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 13.75rem;
+  left: 2.063rem;
+  width: 17.063rem;
+  height: 3.125rem;
+}
+.logoa-1-icon {
+  position: absolute;
+  top: 0;
+  left: 2.875rem;
+  width: 6.438rem;
+  height: 3.063rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+.layer-2-icon {
+  position: absolute;
+  height: 32.65%;
+  width: 16.11%;
+  top: 45.51%;
+  right: 83.89%;
+  bottom: 21.84%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.menu-logo {
+  text-decoration: none;
+  position: absolute;
+  top: 5.375rem;
+  left: 4.563rem;
+  width: 9.313rem;
+  height: 3.063rem;
+  cursor: pointer;
+}
+.user-icon {
+  position: absolute;
+  height: 3.59%;
+  width: 17.65%;
+  top: 61.57%;
+  right: 41.18%;
+  bottom: 34.84%;
+  left: 41.18%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: contain;
+}
+.menu-lateral {
+  position: absolute;
+  top: -1.187rem;
+  left: -3.125rem;
+  width: 19.125rem;
+  height: 94rem;
+}
+.blank-line {
+  font-size: 2.375rem;
+}
+.seja-bem-vindoa-ao-seu-port {
+  margin: 0;
+}
+.arraste-seus-arquivos {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.seja-bem-vindoa-container {
+  position: absolute;
+  top: 17.25rem;
+  left: calc(50% - 388px);
+}
+.vector-icon,
+.vector-icon1 {
+  position: absolute;
+  height: 11.45%;
+  width: 14.77%;
+  top: 42.07%;
+  right: 29.17%;
+  bottom: 46.47%;
+  left: 56.06%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.vector-icon1 {
+  height: 97.72%;
+  width: 97.8%;
+  top: 1.45%;
+  right: 1.16%;
+  bottom: 0.83%;
+  left: 1.04%;
+}
+.vector-icon2,
+.vector-icon3 {
+  height: 4.15%;
+  width: 25.64%;
+  right: 60.41%;
+  left: 13.94%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.vector-icon2 {
+  position: absolute;
+  top: 14.36%;
+  bottom: 81.49%;
+  overflow: hidden;
+}
+.vector-icon3 {
+  top: 27.72%;
+  bottom: 68.13%;
+}
+.document,
+.vector-icon3,
+.vector-icon4 {
+  position: absolute;
+  overflow: hidden;
+}
+.vector-icon4 {
+  height: 4.15%;
+  width: 51.04%;
+  top: 81.45%;
+  right: 35.02%;
+  bottom: 14.4%;
+  left: 13.94%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.document {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  top: 0;
+  left: 18.25rem;
+  width: 15.063rem;
+  height: 15.063rem;
+}
+.centro-bg {
+  position: absolute;
+  top: 22.563rem;
+  left: calc(50% - 303px);
+  width: 48.5rem;
+  height: 30rem;
+}
+.backoffice {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 64rem;
+  overflow: hidden;
+  text-align: center;
+  font-size: 1.875rem;
+  color: #000;
+  font-family: var(--font-mulish);
+}

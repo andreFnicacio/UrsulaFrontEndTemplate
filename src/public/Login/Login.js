@@ -23,7 +23,8 @@ function Login() {
 
         const success = await doLogin(email, password);
         if (success) {
-            navigate('/login');
+            localStorage.setItem("token",success.user.secretToken);
+            navigate('/backoffice');
         }
     }
 
