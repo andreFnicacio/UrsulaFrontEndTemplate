@@ -249,9 +249,9 @@
 }
 .centro-bg {
   position: absolute;
-  top: 22.563rem;
-  left: calc(50% - 303px);
-  width: 48.5rem;
+  top: 2.563rem;
+  left: calc(50% - 800px);
+  width: 110.5rem;
   height: 30rem;
 }
 .backoffice {
@@ -266,10 +266,156 @@
   font-family: var(--font-mulish);
 }
 
+/* Adicione estas regras ao seu arquivo BackOffice.css */
+
+/* Estilo para o container da tabela */
 .file-details {
   margin-top: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+}
+
+/* Estilo para a tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.thead-light th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td, .table th {
+  padding: 1rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table-centered {
+  text-align: center;
+}
+
+.table-nowrap {
+  white-space: nowrap;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-start {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.rounded-end {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.border-0 {
+  border: 0;
+}
+
+/* Adicione estas regras ao seu arquivo BackOffice.css */
+
+/* Estilo para o container da tabela */
+.file-details {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Estilo para a tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.thead-light th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td, .table th {
+  padding: 1rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table-centered {
+  text-align: center;
+}
+
+.table-nowrap {
+  white-space: nowrap;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-start {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.rounded-end {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.border-0 {
+  border: 0;
+}
+
+/* Adicione estas regras ao seu arquivo BackOffice.css */
+
+/* Adicione estas regras ao seu arquivo BackOffice.css */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.page-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.page-item:hover {
+  background-color: #e9ecef;
+  color: #0056b3;
+}
+
+/* Estilo para a tabela com rolagem */
+.table-responsive {
+  max-height: 400px;
+  overflow-y: scroll;
 }

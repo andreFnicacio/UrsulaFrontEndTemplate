@@ -1,15 +1,34 @@
-import React, { useCallback, useState } from "react";
-import { uploadDocument } from '../../services/UrsulaService';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React, { useCallback, useEffect, useState } from "react";
+import { getAllDetails, uploadDocument } from '../../services/UrsulaService'; // Importando as funções do serviço
 import "./BackOffice.css";
 
 const BackOffice = () => {
-  const [uploadedFiles, setUploadedFiles] = useState(null);
+  const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
   const onMenuLogoClick = useCallback(() => {
     // Please sync "Pagina Inicial" to the project
+  }, []);
+
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      setIsLoading(true);
+      setErrorMessage("");
+
+      try {
+        const data = await getAllDetails();
+        setDocuments(data);
+      } catch (error) {
+        setErrorMessage("Erro ao buscar documentos: " + error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDocuments();
   }, []);
 
   const handleFileUpload = async (event) => {
@@ -20,7 +39,8 @@ const BackOffice = () => {
 
       try {
         const data = await uploadDocument(file);
-        setUploadedFiles([data.document]); // Assumindo que `document` é o objeto retornado
+        const updatedDocuments = await getAllDetails(); // Atualizar a lista de documentos após upload bem-sucedido
+        setDocuments(updatedDocuments);
       } catch (error) {
         setErrorMessage("Erro ao fazer upload do arquivo: " + error.message);
       } finally {
@@ -29,6 +49,14 @@ const BackOffice = () => {
       }
     }
   };
+
+  // Calcular o índice dos documentos para a página atual
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentDocuments = documents.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Função para mudar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="backoffice">
@@ -72,39 +100,51 @@ const BackOffice = () => {
           <div className="loading">Carregando...</div>
         ) : errorMessage ? (
           <div className="error-message">{errorMessage}</div>
-        ) : uploadedFiles ? (
-          <div className="file-details">
-            <h2>Detalhes dos Documentos</h2>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Categoria</TableCell>
-                    <TableCell>CNPJ Contratante</TableCell>
-                    <TableCell>Valor Contratado</TableCell>
-                    <TableCell>Validade Inicial</TableCell>
-                    <TableCell>Duração</TableCell>
-                    <TableCell>Contratante</TableCell>
-                    <TableCell>Contratada</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {uploadedFiles.map((file, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{file.id}</TableCell>
-                      <TableCell>{file.category}</TableCell>
-                      <TableCell>{file.cnpj_contratante}</TableCell>
-                      <TableCell>{file.contracted_value}</TableCell>
-                      <TableCell>{file.initial_validity}</TableCell>
-                      <TableCell>{file.duration}</TableCell>
-                      <TableCell>{file.contratante}</TableCell>
-                      <TableCell>{file.contratada}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+        ) : documents.length > 0 ? (
+          <div className="file-details card border-0 shadow">
+            <div className="card-body">
+              <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'scroll' }}>
+                <table className="table table-centered table-nowrap mb-0 rounded">
+                  <thead className="thead-light">
+                    <tr>
+                      <th className="border-0 rounded-start">ID</th>
+                      <th className="border-0">Categoria</th>
+                      <th className="border-0">CNPJ Contratante</th>
+                      <th className="border-0">Valor Contratado</th>
+                      <th className="border-0">Validade Inicial</th>
+                      <th className="border-0">Duração</th>
+                      <th className="border-0">Contratante</th>
+                      <th className="border-0 rounded-end">Contratada</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentDocuments.map((document, index) => (
+                      <tr key={index}>
+                        <td className="border-0">{document.id}</td>
+                        <td className="border-0">{document.category}</td>
+                        <td className="border-0">{document.cnpj_contratante}</td>
+                        <td className="border-0">{document.contracted_value}</td>
+                        <td className="border-0">{document.initial_validity}</td>
+                        <td className="border-0">{document.duration}</td>
+                        <td className="border-0">{document.contratante}</td>
+                        <td className="border-0">{document.contratada}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="pagination">
+                {Array.from({ length: Math.ceil(documents.length / itemsPerPage) }, (_, index) => (
+                  <button
+                    key={index + 1}
+                    onClick={() => paginate(index + 1)}
+                    className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="seja-bem-vindoa-container">
@@ -115,6 +155,15 @@ const BackOffice = () => {
             <p className="arraste-seus-arquivos">{`Arraste seus arquivos e pastas para cá ou use o botão "Enviar arquivo"
             para fazer upload e começar a analisar.`}</p>
           </div>
+        )}
+        {!documents.length && (
+          <button className="document" autoFocus={true} id="uploadClick" onClick={() => document.getElementById('fileInput').click()}>
+            <img className="vector-icon" alt="" src="/vector.svg" />
+            <img className="vector-icon1" alt="" src="/vector1.svg" />
+            <img className="vector-icon2" alt="" src="/vector2.svg" />
+            <img className="vector-icon3" alt="" src="/vector3.svg" />
+            <img className="vector-icon4" alt="" src="/vector4.svg" />
+          </button>
         )}
       </div>
     </div>

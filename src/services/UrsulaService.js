@@ -3,10 +3,10 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 
-export async function getDetails(token) {
+export async function getAllDetails() {
     const registerUrl = `${API_URL}/users/ursula/documents`;
     try {
-      const response = await axios.get(registerUrl, {"accept": token});
+      const response = await axios.get(registerUrl);
       return response.data;
     } catch (error) {
       console.error('Erro ao realizar o cadastro:', error);
@@ -14,7 +14,7 @@ export async function getDetails(token) {
       return false;
     }
   }
-
+  
   export async function uploadDocument(file) {
     const uploadUrl = `${API_URL}/users/ursula/upload`;
     const formData = new FormData();
