@@ -14,4 +14,25 @@ export async function getDetails(token) {
       return false;
     }
   }
+
+  export async function uploadDocument(file) {
+    const uploadUrl = `${API_URL}/users/ursula/upload`;
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+  
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(uploadUrl, formData, {
+        headers: {
+          'accept': token || '*/*',
+          'Content-Type': 'multipart/form-data',
+        }
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao fazer upload do arquivo:', error);
+      throw error;
+    }
+  }  
   

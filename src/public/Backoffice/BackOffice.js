@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
+import { uploadDocument } from '../../services/UrsulaService';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import "./BackOffice.css";
-import { getToken } from '../../utils/storage'; // Importe a função utilitária
 
 const BackOffice = () => {
   const [uploadedFiles, setUploadedFiles] = useState(null);
@@ -14,29 +15,12 @@ const BackOffice = () => {
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const formData = new FormData();
-      formData.append('file', file, file.name);
-
       setIsLoading(true);
       setErrorMessage("");
 
       try {
-        const token = getToken(); // Obtenha o token do localStorage
-        const response = await fetch("https://grantosegurosapimanagement-production.up.railway.app/users/ursula/upload", {
-          method: 'POST',
-          headers: {
-            'accept': 'aa6a9a9b-c252-4288-8bd1-5c5f341813cd',
-            'Content-Type': 'multipart/form-data'
-          },
-          body: formData
-        });
-        console.log(response)
-        if (response.status === 200) {
-          const data = await response.json();
-          setUploadedFiles([data]); // Supondo que o endpoint retorne um objeto de arquivo único
-        } else {
-          setErrorMessage("Falha no upload do arquivo");
-        }
+        const data = await uploadDocument(file);
+        setUploadedFiles([data.document]); // Assumindo que `document` é o objeto retornado
       } catch (error) {
         setErrorMessage("Erro ao fazer upload do arquivo: " + error.message);
       } finally {
@@ -91,24 +75,36 @@ const BackOffice = () => {
         ) : uploadedFiles ? (
           <div className="file-details">
             <h2>Detalhes dos Documentos</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome do Arquivo</th>
-                  <th>Tamanho</th>
-                  <th>Tipo</th>
-                </tr>
-              </thead>
-              <tbody>
-                {uploadedFiles.map((file, index) => (
-                  <tr key={index}>
-                    <td>{file.name}</td>
-                    <td>{file.size} bytes</td>
-                    <td>{file.type}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Categoria</TableCell>
+                    <TableCell>CNPJ Contratante</TableCell>
+                    <TableCell>Valor Contratado</TableCell>
+                    <TableCell>Validade Inicial</TableCell>
+                    <TableCell>Duração</TableCell>
+                    <TableCell>Contratante</TableCell>
+                    <TableCell>Contratada</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {uploadedFiles.map((file, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{file.id}</TableCell>
+                      <TableCell>{file.category}</TableCell>
+                      <TableCell>{file.cnpj_contratante}</TableCell>
+                      <TableCell>{file.contracted_value}</TableCell>
+                      <TableCell>{file.initial_validity}</TableCell>
+                      <TableCell>{file.duration}</TableCell>
+                      <TableCell>{file.contratante}</TableCell>
+                      <TableCell>{file.contratada}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
         ) : (
           <div className="seja-bem-vindoa-container">
@@ -120,13 +116,6 @@ const BackOffice = () => {
             para fazer upload e começar a analisar.`}</p>
           </div>
         )}
-        <button className="document" autoFocus={true} id="uploadClick">
-          <img className="vector-icon" alt="" src="/vector.svg" />
-          <img className="vector-icon1" alt="" src="/vector1.svg" />
-          <img className="vector-icon2" alt="" src="/vector2.svg" />
-          <img className="vector-icon3" alt="" src="/vector3.svg" />
-          <img className="vector-icon4" alt="" src="/vector4.svg" />
-        </button>
       </div>
     </div>
   );
